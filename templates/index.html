@@ -5,34 +5,44 @@
 {% endblock %}
 
 {% block body %}
+<br>
 <div class="content">
-    <h1 style="text-align: center">Task Master</h1>
-    <table border="1">
-        <tr>
-            <th>Task</th>
-            <th>Added</th>
-            <th>Actions</th>                          
-        </tr>
-        {% for task in tasks %}
-            <tr>
-                <td>{{ task.content }}</td>
-                <td>{{ task.date_created.date() }}</td>
-                <td>
-                    <a href="/delete/{{ task.id }}">Delete</a>
-                    <br>
-                    <a href="/update/{{ task.id }}">Update</a>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+
     <form action="/" method="POST">
-        <input type="text" name="content" id="content">
-        <input type="submit" value="Add Task">
+        <!-- <input type="text" name="content" id="content">
+        <input type="submit" value="Add Task"> -->
+        <div class="input-group mb-3">
+            <input type="text" name="content" id="content" class="form-control" placeholder="Add your task." aria-label="Add your task." aria-describedby="button-addon2">
+            <button class="btn btn-success" type="submit" id="button-addon2" value="Add Task" >Add</button>
+        </div>
     </form>
+    <br>
+
+        {% for task in tasks %}
+          <div class="card text-center">
+            <div class="card-header">
+              <ul class="nav nav-pills card-header-pills">
+                <li class="nav-item text-right">
+                    <a class="btn-outline-dark title"><b> {{task.date_created.date()}}</b> </a>
+                </li>
+                <li class="nav-item update">
+                  <a class="btn btn-outline-dark" href="/update/{{ task.id }}"><i class="fas fa-pencil-alt "></i> </a>
+                </li>
+              </ul>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title text-center">{{ task.content }}</h5>
+              <a href="/delete/{{ task.id }}" class="btn btn-warning">  Completed <i class="fa fa-check-circle" aria-hidden="true"></i> </a>
+            </div>
+          </div>
+
+          <br>
+        {% endfor %}
+    <!-- </table> -->
+    <br>
+    
 </div>
 {% endblock %} 
-
-
 
 
 
